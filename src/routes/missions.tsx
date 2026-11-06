@@ -6,12 +6,12 @@ import { PriorityBadge, SlaCountdown, StatusBadge, useNow } from "@/components/i
 import { applyFilter, FILTERS, type Filter, useStore } from "@/lib/intellidesk/store";
 import { cn } from "@/lib/utils";
 
-type Search = { filter?: Filter; team?: string };
+type Search = { filter?: Filter | undefined; team?: string | undefined };
 
 export const Route = createFileRoute("/missions")({
   validateSearch: (s: Record<string, unknown>): Search => ({
-    filter: FILTERS.includes(s.filter as Filter) ? (s.filter as Filter) : undefined,
-    team: typeof s.team === "string" ? s.team : undefined,
+    filter: FILTERS.includes(s["filter"] as Filter) ? (s["filter"] as Filter) : undefined,
+    team: typeof s["team"] === "string" ? s["team"] : undefined,
   }),
   head: () => ({
     meta: [

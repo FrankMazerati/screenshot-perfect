@@ -26,16 +26,16 @@ export interface ObjectiveDef {
   stars: number;
   evidenceRequired: boolean;
   approvalRequired: boolean;
-  optional?: boolean;
+  optional?: boolean | undefined;
 }
 
 export interface ObjectiveState extends ObjectiveDef {
   notes: string;
   attachments: string[];
-  completedAt?: number;
-  completedBy?: string;
-  awaitingApproval?: boolean;
-  approvedBy?: string;
+  completedAt?: number | undefined;
+  completedBy?: string | undefined;
+  awaitingApproval?: boolean | undefined;
+  approvedBy?: string | undefined;
   starsEarned: number;
 }
 
@@ -60,14 +60,14 @@ export interface Mission {
   subcategory: string;
   templateId: string;
   team: string;
-  technician?: string;
+  technician?: string | undefined;
   status: MissionStatus;
   receivedAt: number;
   responseDue: number;
   resolutionDue: number;
-  respondedAt?: number;
-  acceptedAt?: number;
-  closedAt?: number;
+  respondedAt?: number | undefined;
+  acceptedAt?: number | undefined;
+  closedAt?: number | undefined;
   escalated: boolean;
   related: string[];
   kb: string[];

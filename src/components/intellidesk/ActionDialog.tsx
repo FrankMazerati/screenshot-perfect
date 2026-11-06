@@ -7,7 +7,7 @@ export function ActionDialog({
 }: {
   open: boolean; onOpenChange: (o: boolean) => void; title: string; description?: string;
   options?: string[]; optionLabel?: string; confirm: string; requireReason?: boolean;
-  onConfirm: (v: { option?: string; reason: string }) => void;
+  onConfirm: (v: { option?: string | undefined; reason: string }) => void;
 }) {
   const [option, setOption] = useState(options?.[0]);
   const [reason, setReason] = useState("");

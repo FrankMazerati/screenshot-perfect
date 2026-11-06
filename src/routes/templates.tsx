@@ -24,7 +24,7 @@ export const Route = createFileRoute("/templates")({
 function Templates() {
   const s = useStore();
   const [sel, setSel] = useState("hw");
-  const t = s.templates.find((x) => x.id === sel) ?? s.templates[0];
+  const t = s.templates.find((x) => x.id === sel) ?? s.templates[0]!;
   const canEdit = s.role === "Manager";
   const patch = (objId: string, p: Record<string, unknown>) =>
     setState((st) => ({ ...st, templates: st.templates.map((x) => x.id !== t.id ? x : { ...x, objectives: x.objectives.map((o) => (o.id === objId ? { ...o, ...p } : o)) }) }));
