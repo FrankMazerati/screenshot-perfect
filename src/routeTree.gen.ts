@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MissionsRouteImport } from './routes/missions'
+import { Route as BriefingIdRouteImport } from './routes/briefing.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const MissionsRoute = MissionsRouteImport.update({
   path: '/missions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BriefingIdRoute = BriefingIdRouteImport.update({
+  id: '/briefing/$id',
+  path: '/briefing/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/missions': typeof MissionsRoute
+  '/briefing/$id': typeof BriefingIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/missions': typeof MissionsRoute
+  '/briefing/$id': typeof BriefingIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/missions': typeof MissionsRoute
+  '/briefing/$id': typeof BriefingIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/missions'
+  fullPaths: '/' | '/missions' | '/briefing/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/missions'
-  id: '__root__' | '/' | '/missions'
+  to: '/' | '/missions' | '/briefing/$id'
+  id: '__root__' | '/' | '/missions' | '/briefing/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MissionsRoute: typeof MissionsRoute
+  BriefingIdRoute: typeof BriefingIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MissionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/briefing/$id': {
+      id: '/briefing/$id'
+      path: '/briefing/$id'
+      fullPath: '/briefing/$id'
+      preLoaderRoute: typeof BriefingIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MissionsRoute: MissionsRoute,
+  BriefingIdRoute: BriefingIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
